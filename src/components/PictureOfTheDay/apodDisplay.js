@@ -83,16 +83,17 @@ const ApodDisplay = props => {
           </a>
         ))}
       {data && <p className={styles.explanation}>{data.explanation}</p>}
-      {data && data.copyright && (
-        <div className={styles.copyrightContainer}>
+
+      <div className={styles.copyrightContainer}>
+        {data && data.copyright && (
           <h6>
             Copyright: <strong>{data.copyright} </strong>
           </h6>
-          <a href="https://apod.nasa.gov/apod/astropix.html"  rel="noreferrer" target="_blank">
-            <h6>NASA's APOD Page</h6>
-          </a>
-        </div>
-      )}
+        )}
+        <a href="https://apod.nasa.gov/apod/astropix.html" rel="noreferrer" target="_blank">
+          <h6>NASA's APOD Page</h6>
+        </a>
+      </div>
     </div>
   );
 };
