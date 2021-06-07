@@ -88,7 +88,7 @@ const ApodDisplay = props => {
           <h6>
             Copyright: <strong>{data.copyright} </strong>
           </h6>
-          <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank">
+          <a href="https://apod.nasa.gov/apod/astropix.html"  rel="noreferrer" target="_blank">
             <h6>NASA's APOD Page</h6>
           </a>
         </div>
