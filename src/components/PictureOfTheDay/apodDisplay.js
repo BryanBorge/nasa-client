@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import moment from "moment";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import styles from "./apodDisplay.module.css";
-import classes from "./apodDisplay.module.css";
+import {FaArrowLeft} from "react-icons/fa";
+import {FaArrowRight} from "react-icons/fa";
 
 const ApodDisplay = props => {
   const [data, setData] = useState();
@@ -43,24 +44,28 @@ const ApodDisplay = props => {
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
-        <div className={styles.btn}>
-          <h5 onClick={handleBackDate}>PREVIOUS DAY</h5>
-        </div>
-        {data && !loading && <h2 className={styles.date}>{date.format("LL")}</h2>}
-        {data && loading && <LoadingSpinner />}
-        {!allowNext && (
-          <div className={styles.btn}>
-            <h5 onClick={handleNextDate}>NEXT DAY</h5>
+        <h2>Astronomy Picture of the Day</h2>
+        <p>
+          Each day a different image or photograph of our fascinating universe is featured, along with a brief
+          explanation written by a professional astronomer.
+        </p>
+        {data && !loading ? (
+          <div className={styles.dateContainer}>
+            <div className={styles.btn}>
+              <FaArrowLeft onClick={handleBackDate} className={styles.icon} />
+            </div>
+            <h2 className={styles.date}>{date.format("LL")}</h2>
+            {!allowNext && (
+              <div className={styles.btn}>
+                <FaArrowRight onClick={handleNextDate} className={styles.icon} />
+              </div>
+            )}
           </div>
+        ) : (
+          <LoadingSpinner />
         )}
       </div>
       {data && <h1 className={styles.title}>{data.title}</h1>}
-      {data && <p className={styles.explanation}>{data.explanation}</p>}
-      {data && data.copyright && (
-        <h6 className={styles.copyright}>
-          Copyright: <strong>{data.copyright} </strong>
-        </h6>
-      )}
       {data &&
         (data.media_type === "video" ? (
           <a href={data.hdurl || data.url} target="blank">
@@ -78,6 +83,17 @@ const ApodDisplay = props => {
             <img className={styles.responsive} alt={data.title} src={data.hdurl || data.url} />
           </a>
         ))}
+      {data && <p className={styles.explanation}>{data.explanation}</p>}
+      {data && data.copyright && (
+        <div className={styles.copyrightContainer}>
+          <h6>
+            Copyright: <strong>{data.copyright} </strong>
+          </h6>
+          <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank">
+            <h6>NASA's APOD Page</h6>
+          </a>
+        </div>
+      )}
     </div>
   );
 };
