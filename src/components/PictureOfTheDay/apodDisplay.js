@@ -15,7 +15,7 @@ const ApodDisplay = props => {
     setAllowNext(date > moment().subtract(1, "day"));
     setLoading(true);
     fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=kvrxQ3qubIwJq4LxYXvFeer9WgfGn8ngDH9e2snK&date=${date
+      `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&date=${date
         .toISOString()
         .slice(0, 10)}`
     )
@@ -25,7 +25,6 @@ const ApodDisplay = props => {
       .then(data => {
         setData(data);
         setLoading(false);
-        console.log(data);
       });
   }, [date]);
 
